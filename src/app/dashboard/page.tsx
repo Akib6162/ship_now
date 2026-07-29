@@ -2,20 +2,10 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import DashboardSidebar from "@/components/layout/DashboardSidebar";
 import {
-    LayoutDashboard,
-    BarChart3,
-    Calendar,
-    Package,
-    MapPin,
-    Warehouse,
     Truck,
-    Users,
-    FileText,
-    MessageSquare,
-    Bell,
-    Settings,
-    ChevronDown,
+    Package,
     Search,
     Plus,
     TrendingUp,
@@ -27,131 +17,19 @@ import {
     MinusCircle,
     Tag,
     RotateCcw,
-    CheckCircle2
+    CheckCircle2,
+    ArrowUp,
+    ChevronUp
 } from "lucide-react";
+import { PiPresentationChartLight } from "react-icons/pi";
 
 export default function Dashboard() {
     const [searchQuery, setSearchQuery] = useState("");
     const [shipmentSearch, setShipmentSearch] = useState("");
-    const [activeTab, setActiveTab] = useState("Dashboard");
-
-    // Sidebar navigation items
-    const navItems = [
-        { name: "Dashboard", icon: LayoutDashboard },
-        { name: "Analytics", icon: BarChart3 },
-        { name: "Calendar", icon: Calendar },
-        { name: "Shipments", icon: Package },
-        { name: "Tracking", icon: MapPin },
-        { name: "Warehouse", icon: Warehouse },
-        { name: "Fleets", icon: Truck },
-        { name: "Drivers", icon: Users },
-        { name: "Invoices & Billing", icon: FileText },
-    ];
 
     return (
         <div className="flex min-h-screen w-full bg-[#F8F9FD] text-gray-800 font-sans">
-            {/* Left Sidebar */}
-            <aside className="w-[260px] bg-white border-r border-gray-100 flex flex-col justify-between py-6 px-4 shrink-0">
-                <div className="flex flex-col gap-6">
-                    {/* Brand Logo */}
-                    <div className="flex items-center gap-2 px-3">
-                        <Image
-                            src="/logo-vivid.png"
-                            alt="ShipNow Logo"
-                            width={24}
-                            height={24}
-                            className="h-6 w-6 object-contain"
-                        />
-                        <span className="text-xl font-black italic tracking-wider text-[#1A1A1A]">
-                            SHIPNOW
-                        </span>
-                    </div>
-
-                    {/* User Profile Card */}
-                    <div className="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl border border-gray-100">
-                        <div className="flex items-center gap-2">
-                            <div className="relative h-9 w-9 rounded-full overflow-hidden bg-purple-200">
-                                <Image
-                                    src="https://picsum.photos/id/1027/100/100"
-                                    alt="User avatar"
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-xs font-bold text-gray-800 leading-tight">John Doe</span>
-                                <span className="text-[10px] text-gray-400 font-medium">Admin</span>
-                            </div>
-                        </div>
-                        <ChevronDown size={14} className="text-gray-400 cursor-pointer hover:text-gray-600" />
-                    </div>
-
-                    {/* Navigation Menu */}
-                    <nav className="flex flex-col gap-1">
-                        {navItems.map((item) => {
-                            const Icon = item.icon;
-                            const isActive = activeTab === item.name;
-                            return (
-                                <button
-                                    key={item.name}
-                                    onClick={() => setActiveTab(item.name)}
-                                    className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                                        isActive
-                                            ? "bg-[#E8E4FD] text-[#856DF3]"
-                                            : "text-gray-500 hover:bg-gray-50 hover:text-gray-800"
-                                    }`}
-                                >
-                                    <div className="flex items-center gap-2.5">
-                                        <Icon size={16} className={isActive ? "text-[#856DF3]" : "text-gray-400"} />
-                                        <span>{item.name}</span>
-                                    </div>
-                                </button>
-                            );
-                        })}
-                    </nav>
-
-                    <div className="h-[1px] bg-gray-100 my-1" />
-
-                    {/* Secondary Navigation */}
-                    <div className="flex flex-col gap-1">
-                        <button className="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 cursor-pointer">
-                            <div className="flex items-center gap-2.5">
-                                <MessageSquare size={16} className="text-gray-400" />
-                                <span>Message</span>
-                            </div>
-                            <span className="px-1.5 py-0.5 text-[10px] font-bold text-white bg-[#856DF3] rounded-full">19</span>
-                        </button>
-                        <button className="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 cursor-pointer">
-                            <div className="flex items-center gap-2.5">
-                                <Bell size={16} className="text-gray-400" />
-                                <span>Notification</span>
-                            </div>
-                            <span className="px-1.5 py-0.5 text-[10px] font-bold text-white bg-blue-500 rounded-full">5</span>
-                        </button>
-                        <button className="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 cursor-pointer">
-                            <div className="flex items-center gap-2.5">
-                                <Settings size={16} className="text-gray-400" />
-                                <span>Settings</span>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-
-                {/* Promo Card */}
-                <div className="bg-[#1A1A1A] text-white p-4 rounded-2xl flex flex-col gap-3 relative overflow-hidden shadow-lg mt-4">
-                    <div className="absolute -right-4 -top-4 w-12 h-12 bg-white/5 rounded-full" />
-                    <div className="absolute -left-6 -bottom-6 w-20 h-20 bg-white/5 rounded-full" />
-                    <div className="flex flex-col gap-1.5 z-10">
-                        <h4 className="text-xs font-bold leading-snug">Loving ShipNow Free?</h4>
-                        <p className="text-[10px] text-gray-400 leading-normal">
-                            Go Pro to access priority support, real-time tracking, and full analytics.
-                        </p>
-                    </div>
-                    <button className="w-full bg-white text-gray-900 py-2 rounded-xl text-[10px] font-bold hover:bg-gray-100 transition-colors z-10 cursor-pointer">
-                        Go Pro Today
-                    </button>
-                </div>
-            </aside>
+            <DashboardSidebar active="Dashboard" />
 
             {/* Main Content Pane */}
             <main className="flex-1 flex flex-col overflow-y-auto max-h-screen py-6 px-8">
@@ -181,10 +59,10 @@ export default function Dashboard() {
 
                 {/* Unified Main Grid Layout (Left Content Column + Right Sidebar Widgets Column) */}
                 <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 items-start mb-8">
-                    
+
                     {/* Left Column (Spans 3/4) */}
                     <div className="xl:col-span-3 flex flex-col gap-6">
-                        
+
                         {/* Metrics Cards Row */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {/* Active Shipments Card */}
@@ -192,8 +70,10 @@ export default function Dashboard() {
                                 <div className="flex flex-col gap-1">
                                     <span className="text-[11px] font-bold text-gray-400 tracking-wide uppercase">Active Shipments</span>
                                     <span className="text-3xl font-extrabold text-gray-900 leading-tight">1,284 <span className="text-xs font-semibold text-gray-400">shipments</span></span>
-                                    <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-500 mt-2 bg-emerald-50 w-fit px-1.5 py-0.5 rounded">
-                                        <TrendingUp size={10} />
+                                    <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-500 mt-2">
+                                        <div className="bg-emerald-100 p-1 rounded-full">
+                                            <ChevronUp className="text-emerald-500" size={11} />
+                                        </div>
                                         <span>+8.7% <span className="text-gray-400 font-medium">from last week</span></span>
                                     </div>
                                 </div>
@@ -207,13 +87,15 @@ export default function Dashboard() {
                                 <div className="flex flex-col gap-1">
                                     <span className="text-[11px] font-bold text-gray-400 tracking-wide uppercase">Delivery Performance</span>
                                     <span className="text-3xl font-extrabold text-gray-900 leading-tight">94.3% <span className="text-xs font-semibold text-gray-400">on-time</span></span>
-                                    <div className="flex items-center gap-1 text-[10px] font-bold text-rose-500 mt-2 bg-rose-50 w-fit px-1.5 py-0.5 rounded">
-                                        <TrendingDown size={10} />
+                                    <div className="flex items-center gap-1 text-[10px] font-bold text-rose-500 mt-2">
+                                        <div className="bg-rose-100 p-1 rounded-full">
+                                            <ChevronUp className="text-rose-500" size={11} />
+                                        </div>
                                         <span>-1.2% <span className="text-gray-400 font-medium">from last week</span></span>
                                     </div>
                                 </div>
                                 <div className="h-10 w-10 bg-blue-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 shrink-0">
-                                    <BarChart3 size={18} />
+                                    <PiPresentationChartLight size={18} />
                                 </div>
                             </div>
 
@@ -222,8 +104,10 @@ export default function Dashboard() {
                                 <div className="flex flex-col gap-1">
                                     <span className="text-[11px] font-bold text-gray-400 tracking-wide uppercase">Revenue</span>
                                     <span className="text-3xl font-extrabold text-gray-900 leading-tight">$82,450</span>
-                                    <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-500 mt-2 bg-emerald-50 w-fit px-1.5 py-0.5 rounded">
-                                        <TrendingUp size={10} />
+                                    <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-500 mt-2">
+                                        <div className="bg-emerald-100 p-1 rounded-full">
+                                            <ChevronUp className="text-emerald-500" size={11} />
+                                        </div>
                                         <span>+12.4% <span className="text-gray-400 font-medium">from last month</span></span>
                                     </div>
                                 </div>
@@ -295,11 +179,10 @@ export default function Dashboard() {
                                             <div className="w-6 bg-gray-100 rounded-t-sm h-[110px] flex items-end relative overflow-hidden">
                                                 <div
                                                     style={{ height: `${bar.v}%` }}
-                                                    className={`w-full rounded-t-sm transition-all duration-300 ${
-                                                        bar.active
-                                                            ? "bg-[#856DF3]"
-                                                            : "bg-gray-400 group-hover:bg-[#856DF3]/75"
-                                                    }`}
+                                                    className={`w-full rounded-t-sm transition-all duration-300 ${bar.active
+                                                        ? "bg-[#856DF3]"
+                                                        : "bg-gray-400 group-hover:bg-[#856DF3]/75"
+                                                        }`}
                                                 />
                                                 {bar.active && (
                                                     <div className="absolute bottom-0 left-0 right-0 top-0 bg-[#856DF3]/15 animate-pulse" />
@@ -378,15 +261,13 @@ export default function Dashboard() {
                                             <div className="flex gap-[2px] items-end h-[110px]">
                                                 <div
                                                     style={{ height: `${bar.r}%` }}
-                                                    className={`w-2.5 rounded-t-sm transition-all duration-300 ${
-                                                        bar.active ? "bg-[#856DF3]" : "bg-[#D8D4FC] hover:bg-[#856DF3]/85"
-                                                    }`}
+                                                    className={`w-2.5 rounded-t-sm transition-all duration-300 ${bar.active ? "bg-[#856DF3]" : "bg-[#D8D4FC] hover:bg-[#856DF3]/85"
+                                                        }`}
                                                 />
                                                 <div
                                                     style={{ height: `${bar.c}%` }}
-                                                    className={`w-2.5 rounded-t-sm transition-all duration-300 ${
-                                                        bar.active ? "bg-[#1A1A1A]" : "bg-gray-300 hover:bg-gray-400"
-                                                    }`}
+                                                    className={`w-2.5 rounded-t-sm transition-all duration-300 ${bar.active ? "bg-[#1A1A1A]" : "bg-gray-300 hover:bg-gray-400"
+                                                        }`}
                                                 />
                                             </div>
                                             <span className="text-[9px] text-gray-400 font-bold leading-none">{bar.m}</span>
@@ -592,7 +473,7 @@ export default function Dashboard() {
 
                     {/* Right Column (Sidebar Widgets Stacked Vertically, Spans 1/4) */}
                     <div className="xl:col-span-1 flex flex-col gap-6">
-                        
+
                         {/* Shipment Type Donut Card */}
                         <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
                             <div className="flex justify-between items-center mb-2">
@@ -801,29 +682,29 @@ export default function Dashboard() {
                     <div className="flex items-center gap-3 text-gray-300">
                         <a href="#" className="hover:text-gray-600 transition-colors">
                             <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.8c4.56-.93 8-4.96 8-9.8z"/>
+                                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.8c4.56-.93 8-4.96 8-9.8z" />
                             </svg>
                         </a>
                         <a href="#" className="hover:text-gray-600 transition-colors">
                             <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                             </svg>
                         </a>
                         <a href="#" className="hover:text-gray-600 transition-colors">
                             <svg className="w-3.5 h-3.5 stroke-current fill-none stroke-2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                             </svg>
                         </a>
                         <a href="#" className="hover:text-gray-600 transition-colors">
                             <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                                <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                             </svg>
                         </a>
                         <a href="#" className="hover:text-gray-600 transition-colors">
                             <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                             </svg>
                         </a>
                     </div>
