@@ -27,7 +27,7 @@ const navItems = [
     { name: "Warehouse", icon: Warehouse, href: "/warehouse" },
     { name: "Fleets", icon: Truck, href: "/dashboard" },
     { name: "Drivers", icon: Users, href: "/dashboard" },
-    { name: "Invoices & Billing", icon: FileText, href: "/dashboard" },
+    { name: "Invoices & Billing", icon: FileText, href: "/invoices" },
 ];
 
 export default function DashboardSidebar({ active }: { active: string }) {
